@@ -1,6 +1,7 @@
 {
   "domain": "onkyo",
   "name": "Onkyo & Pioneer Network Receivers",
+  "integration_type": "hub",
   "config_flow": true,
   "documentation": "https://www.home-assistant.io/integrations/onkyo",
   "requirements": ["pyeiscp==0.0.7"],
