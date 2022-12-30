@@ -1,0 +1,5 @@
+{
+  "domain": "luxtronik",
+  "name": "Luxtronik",
+  "integrations": ["luxtronik"]
+}

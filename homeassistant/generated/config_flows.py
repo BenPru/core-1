@@ -235,6 +235,7 @@ FLOWS = {
         "lookin",
         "luftdaten",
         "lutron_caseta",
+        "luxtronik",
         "lyric",
         "mailgun",
         "matter",
