@@ -267,7 +267,7 @@ class ShellyBlockCoordinator(DataUpdateCoordinator[None]):
         self.shutdown()
 
 
-class ShellyRestCoordinator(DataUpdateCoordinator):
+class ShellyRestCoordinator(DataUpdateCoordinator[None]):
     """Coordinator for a Shelly REST device."""
 
     def __init__(
@@ -509,7 +509,8 @@ class ShellyRpcCoordinator(DataUpdateCoordinator[None]):
         This will be executed on connect or when the config entry
         is updated.
         """
-        await self._async_connect_ble_scanner()
+        if not self.entry.data.get(CONF_SLEEP_PERIOD):
+            await self._async_connect_ble_scanner()
 
     async def _async_connect_ble_scanner(self) -> None:
         """Connect BLE scanner."""
@@ -579,7 +580,7 @@ class ShellyRpcCoordinator(DataUpdateCoordinator[None]):
         await self.shutdown()
 
 
-class ShellyRpcPollingCoordinator(DataUpdateCoordinator):
+class ShellyRpcPollingCoordinator(DataUpdateCoordinator[None]):
     """Polling coordinator for a Shelly RPC based device."""
 
     def __init__(
