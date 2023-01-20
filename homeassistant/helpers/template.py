@@ -378,9 +378,9 @@ class Template:
             wanted_env = _ENVIRONMENT
         ret: TemplateEnvironment | None = self.hass.data.get(wanted_env)
         if ret is None:
-            ret = self.hass.data[wanted_env] = TemplateEnvironment(  # type: ignore[no-untyped-call]
+            ret = self.hass.data[wanted_env] = TemplateEnvironment(
                 self.hass,
-                self._limited,
+                self._limited,  # type: ignore[no-untyped-call]
                 self._strict,
             )
         return ret
@@ -1085,7 +1085,7 @@ def integration_entities(hass: HomeAssistant, entry_name: str) -> Iterable[str]:
         return [entry.entity_id for entry in entries]
 
     # fallback to just returning all entities for a domain
-    # pylint: disable=import-outside-toplevel
+    # pylint: disable-next=import-outside-toplevel
     from .entity import entity_sources
 
     return [
