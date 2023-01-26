@@ -19,7 +19,7 @@ CLIENT_ID = "1234"
 CLIENT_SECRET = "5678"
 
 
-@pytest.fixture()
+@pytest.fixture
 async def mock_impl(hass):
     """Mock implementation."""
     await async_setup_component(hass, DOMAIN, {})
@@ -120,7 +120,6 @@ async def test_reauthentication_flow(
 
     result = await hass.config_entries.flow.async_configure(flows[0]["flow_id"], {})
 
-    # pylint: disable-next=protected-access
     state = config_entry_oauth2_flow._encode_jwt(
         hass,
         {
