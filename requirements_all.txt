@@ -779,6 +779,7 @@ georss_qld_bushfire_alert_client==0.5
 
 # homeassistant.components.dlna_dmr
 # homeassistant.components.kef
+# homeassistant.components.luxtronik
 # homeassistant.components.minecraft_server
 # homeassistant.components.nmap_tracker
 # homeassistant.components.samsungtv
@@ -2231,6 +2232,9 @@ renault-api==0.1.11
 
 # homeassistant.components.reolink
 reolink-aio==0.3.0
+
+# homeassistant.components.luxtronik
+requests==2.28.1
 
 # homeassistant.components.python_script
 restrictedpython==6.0

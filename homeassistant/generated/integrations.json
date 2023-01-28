@@ -164,6 +164,17 @@
       "config_flow": false,
       "iot_class": "cloud_polling"
     },
+    "alphainnotec": {
+      "name": "alpha innotec",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
+    },
     "amazon": {
       "name": "Amazon",
       "integrations": {
@@ -710,6 +721,17 @@
       "name": "Bubendorff",
       "integration_type": "virtual",
       "supported_by": "netatmo"
+    },
+    "buderus": {
+      "name": "Buderus",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
     },
     "buienradar": {
       "name": "Buienradar",
@@ -1280,6 +1302,17 @@
       "integration_type": "hub",
       "config_flow": true,
       "iot_class": "cloud_polling"
+    },
+    "elco": {
+      "name": "Elco",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
     },
     "elgato": {
       "name": "Elgato",
@@ -3050,7 +3083,7 @@
       "supported_by": "hunterdouglas_powerview"
     },
     "luxtronik": {
-      "name": "Luxtronik",
+      "name": "Luxtronik heatpump controller",
       "integrations": {
         "luxtronik": {
           "integration_type": "hub",
@@ -3625,6 +3658,17 @@
       "config_flow": true,
       "iot_class": "local_push"
     },
+    "nibe": {
+      "name": "Nibe",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
+    },
     "nibe_heatpump": {
       "name": "Nibe Heat Pump",
       "integration_type": "hub",
@@ -3707,6 +3751,17 @@
       "integration_type": "hub",
       "config_flow": true,
       "iot_class": "cloud_polling"
+    },
+    "novelan": {
+      "name": "Novelan",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
     },
     "nsw_fuel_station": {
       "name": "NSW Fuel Station Price",
@@ -4595,6 +4650,17 @@
       "config_flow": true,
       "iot_class": "local_push"
     },
+    "roth": {
+      "name": "Roth",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
+    },
     "rova": {
       "name": "ROVA",
       "integration_type": "hub",
@@ -4871,6 +4937,17 @@
       "integration_type": "hub",
       "config_flow": true,
       "iot_class": "local_push"
+    },
+    "siemens": {
+      "name": "Siemens Novelan",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
     },
     "sigfox": {
       "name": "Sigfox",
@@ -6167,6 +6244,17 @@
       "integration_type": "device",
       "config_flow": true,
       "iot_class": "local_push"
+    },
+    "wolf": {
+      "name": "Wolf Heiztechnik",
+      "integrations": {
+        "luxtronik": {
+          "integration_type": "hub",
+          "config_flow": true,
+          "iot_class": "local_polling",
+          "name": "Luxtronik"
+        }
+      }
     },
     "wolflink": {
       "name": "Wolf SmartSet Service",

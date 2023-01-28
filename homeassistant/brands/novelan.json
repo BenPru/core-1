@@ -1,5 +1,5 @@
 {
   "domain": "luxtronik",
-  "name": "Luxtronik heatpump controller",
+  "name": "Novelan",
   "integrations": ["luxtronik"]
 }
