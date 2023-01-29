@@ -10,7 +10,7 @@ def get_sensor_data(
     luxtronik_key: str,
 ) -> Any:
     """Get sensor data."""
-    if luxtronik_key is None:
+    if luxtronik_key is None or "." not in luxtronik_key:
         LOGGER.warning(
             "Function get_sensor_data luxtronik_key %s is None", luxtronik_key
         )
