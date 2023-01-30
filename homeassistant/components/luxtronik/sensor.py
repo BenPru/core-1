@@ -8,7 +8,7 @@ from typing import Any
 
 from homeassistant.components.sensor import ENTITY_ID_FORMAT, SensorEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import STATE_UNAVAILABLE, Platform
+from homeassistant.const import STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -75,7 +75,6 @@ class LuxtronikSensorEntity(LuxtronikEntity, SensorEntity):
             coordinator=coordinator,
             description=description,
             device_info_ident=device_info_ident,
-            platform=Platform.SENSOR,
         )
         self._sensor_prefix = entry.data[CONF_HA_SENSOR_PREFIX]
         self.entity_id = ENTITY_ID_FORMAT.format(
@@ -101,7 +100,7 @@ class LuxtronikSensorEntity(LuxtronikEntity, SensorEntity):
             data, self.entity_description.luxtronik_key.value
         )
         if self._attr_native_value is not None and isinstance(
-            self._attr_native_value, float
+            self._attr_native_value, (float, int)
         ):
             float_value = float(self._attr_native_value)
             if self.entity_description.factor is not None:

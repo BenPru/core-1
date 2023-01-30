@@ -6,7 +6,6 @@ from typing import Any
 
 from homeassistant.components.switch import ENTITY_ID_FORMAT, SwitchEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -56,7 +55,6 @@ class LuxtronikSwitchEntity(LuxtronikEntity, SwitchEntity):
             coordinator=coordinator,
             description=description,
             device_info_ident=device_info_ident,
-            platform=Platform.SWITCH,
         )
         prefix = entry.data[CONF_HA_SENSOR_PREFIX]
         self.entity_id = ENTITY_ID_FORMAT.format(f"{prefix}_{description.key}")
@@ -95,20 +93,13 @@ class LuxtronikSwitchEntity(LuxtronikEntity, SwitchEntity):
             )
         super()._handle_coordinator_update()
 
-    # @property
-    # def icon(self) -> str | None:
-    #     """Return the icon to be used for this entity."""
-    #     if (
-    #         self._attr_state == self.entity_description.on_state
-    #         and self.entity_description.icon_on is not None
-    #     ):
-    #         return self.entity_description.icon_on
-    #     elif (
-    #         self._attr_state != self.entity_description.on_state
-    #         and self.entity_description.icon_off is not None
-    #     ):
-    #         return self.entity_description.icon_off
-    #     return self.entity_description.icon
+    @property
+    def icon(self) -> str | None:
+        """Return the icon to be used for this entity."""
+        if self.entity_description.icon_by_state is not None:
+            if self.is_on in self.entity_description.icon_by_state:
+                return self.entity_description.icon_by_state.get(self.is_on)
+        return super().icon
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the switch on."""

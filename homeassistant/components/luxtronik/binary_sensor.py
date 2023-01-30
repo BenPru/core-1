@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from homeassistant.components.binary_sensor import ENTITY_ID_FORMAT, BinarySensorEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -54,7 +53,6 @@ class LuxtronikBinarySensorEntity(LuxtronikEntity, BinarySensorEntity):
             coordinator=coordinator,
             description=description,
             device_info_ident=device_info_ident,
-            platform=Platform.SWITCH,
         )
         prefix = entry.data[CONF_HA_SENSOR_PREFIX]
         self.entity_id = ENTITY_ID_FORMAT.format(f"{prefix}_{description.key}")

@@ -2,9 +2,10 @@
 # region Imports
 from __future__ import annotations
 
+from contextlib import suppress
 import locale
 
-from homeassistant.const import Platform, UnitOfTemperature
+from homeassistant.const import UnitOfTemperature
 from homeassistant.core import callback
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -27,7 +28,6 @@ class LuxtronikEntity(CoordinatorEntity[LuxtronikCoordinator], RestoreEntity):
         coordinator: LuxtronikCoordinator,
         description: LuxtronikEntityDescription,
         device_info_ident: DeviceKey,
-        platform: Platform,
     ) -> None:
         """Init LuxtronikEntity."""
         super().__init__(coordinator=coordinator)
@@ -55,7 +55,9 @@ class LuxtronikEntity(CoordinatorEntity[LuxtronikCoordinator], RestoreEntity):
             if description.translation_key_name is None
             else description.translation_key_name
         )
-        self._attr_name = coordinator.get_device_entity_title(translation_key, platform)
+        self._attr_name = coordinator.get_device_entity_title(
+            translation_key, description.platform
+        )
         self._attr_state = get_sensor_data(
             coordinator.data, description.luxtronik_key.value
         )
@@ -64,23 +66,20 @@ class LuxtronikEntity(CoordinatorEntity[LuxtronikCoordinator], RestoreEntity):
         """When entity is added to hass."""
         await super().async_added_to_hass()
         # try set locale for local formatting
-        try:
+        with suppress(locale.Error):
             locale.setlocale(
                 locale.LC_ALL,
                 locale.normalize(
                     f"{self.hass.config.language}_{self.hass.config.country}"
                 ),
             )
-        except locale.Error:
-            pass
 
     @property
     def icon(self) -> str | None:
         """Return the icon to be used for this entity."""
         if self.entity_description.icon_by_state is not None:
             if self._attr_state in self.entity_description.icon_by_state:
-                return self.entity_description.icon_by_state.get(str(self._attr_state))
-            return None
+                return self.entity_description.icon_by_state.get(self._attr_state)
         return super().icon
 
     @callback

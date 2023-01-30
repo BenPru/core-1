@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from homeassistant.components.number import ENTITY_ID_FORMAT, NumberEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -54,7 +53,6 @@ class LuxtronikNumberEntity(LuxtronikEntity, NumberEntity):
             coordinator=coordinator,
             description=description,
             device_info_ident=device_info_ident,
-            platform=Platform.NUMBER,
         )
         prefix = entry.data[CONF_HA_SENSOR_PREFIX]
         self.entity_id = ENTITY_ID_FORMAT.format(f"{prefix}_{description.key}")

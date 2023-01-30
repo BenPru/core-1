@@ -14,7 +14,7 @@ from homeassistant.components.water_heater import (
     WaterHeaterEntityFeature,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import ATTR_TEMPERATURE, STATE_OFF, Platform, UnitOfTemperature
+from homeassistant.const import ATTR_TEMPERATURE, STATE_OFF, UnitOfTemperature
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -110,7 +110,6 @@ class LuxtronikWaterHeater(LuxtronikEntity, WaterHeaterEntity):
             coordinator=coordinator,
             description=description,
             device_info_ident=DeviceKey.domestic_water,
-            platform=Platform.WATER_HEATER,
         )
         prefix = entry.data[CONF_HA_SENSOR_PREFIX]
         self.entity_id = ENTITY_ID_FORMAT.format(f"{prefix}_{description.key}")
