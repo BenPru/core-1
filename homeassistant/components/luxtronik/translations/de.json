@@ -20,7 +20,7 @@
                 "name": "Zus\u00e4tzlicher W\u00e4rmeerzeuger"
             },
             "disturbance_output": {
-                "name": "Zustand"
+                "name": "Systemzustand"
             },
             "circulation_pump_heating": {
                 "name": "Umw\u00e4lzpumpe Heizung"

@@ -94,7 +94,6 @@ class LuxtronikCoordinator(DataUpdateCoordinator[LuxtronikCoordinatorData]):
         config: Mapping[str, Any],
     ) -> None:
         """Initialize Luxtronik Client."""
-
         self.lock = threading.Lock()
         self.client = client
         super().__init__(

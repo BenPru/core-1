@@ -18,7 +18,10 @@ from .const import (
     DeviceKey,
     FirmwareVersionMinor,
     LuxCalculation as LC,
+    LuxOperationMode,
     LuxParameter as LP,
+    LuxStatus1Option,
+    LuxStatus3Option,
     LuxVisibility as LV,
     SensorAttrFormat,
     SensorAttrKey as SA,
@@ -37,16 +40,10 @@ SENSORS_STATUS: list[descr] = [
         luxtronik_key=LC.C0080_STATUS,
         icon_by_state=LUX_STATE_ICON_MAP,
         device_class=SensorDeviceClass.ENUM,
-        options=[
-            "heating",
-            "hot water",
-            "swimming pool/solar",
-            "evu",
-            "defrost",
-            "heating external source",
-            "cooling",
-            "no request",
+        extra_attributes=[
+            attr(SA.EVU_FIRST_START_TIME, LC.UNSET, None, True),
         ],
+        options=[e.value for e in LuxOperationMode],
     ),
 ]
 
@@ -84,16 +81,7 @@ SENSORS: list[descr] = [
         icon="mdi:numeric-1-circle",
         entity_registry_visible_default=False,
         device_class=SensorDeviceClass.ENUM,
-        options=[
-            "heatpump running",
-            "heatpump idle",
-            "heatpump coming",
-            "errorcode slot 0",
-            "defrost",
-            "witing on LIN connection",
-            "compressor heating up",
-            "pump forerun",
-        ],
+        options=[e.value for e in LuxStatus1Option]
         # translation_key="status1",
     ),
     descr(
@@ -113,24 +101,7 @@ SENSORS: list[descr] = [
         icon="mdi:numeric-3-circle",
         entity_registry_visible_default=False,
         device_class=SensorDeviceClass.ENUM,
-        options=[
-            "heating",
-            "no request",
-            "grid switch on delay",
-            "cycle lock",
-            "lock time",
-            "domestic water",
-            "info bake out program",
-            "defrost",
-            "pump forerun",
-            "thermal desinfection",
-            "cooling",
-            "swimming pool/solar",
-            "heating external energy source",
-            "domestic water external energy source",
-            "flow monitoring",
-            "second heat generator 1 active",
-        ],
+        options=[e.value for e in LuxStatus3Option],
         # translation_key="status3",
     ),
     descr(
@@ -436,6 +407,13 @@ SENSORS: list[descr] = [
         icon="mdi:thermometer",
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        extra_attributes=[
+            attr(
+                SA.SWITCH_GAP,
+                LC.C0011_FLOW_OUT_TEMPERATURE,
+                SensorAttrFormat.SWITCH_GAP,
+            ),
+        ],
     ),
     descr(
         key=SensorKey.OPERATION_HOURS_HEATING,

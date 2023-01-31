@@ -109,6 +109,45 @@ class LuxMode(StrEnum):
     holidays: Final = "Holidays"
 
 
+class LuxStatus1Option(StrEnum):
+    """LuxStatus1 option defrost etc."""
+
+    heatpump_running: Final = "heatpump running"
+    heatpump_idle: Final = "heatpump idle"
+    heatpump_coming: Final = "heatpump coming"
+    heatpump_shutdown: Final = "heatpump shutdown"
+    errorcode_slot_zero: Final = "errorcode slot 0"
+    defrost: Final = "defrost"
+    witing_on_LIN_connection: Final = "witing on LIN connection"
+    compressor_heating_up: Final = "compressor heating up"
+    pump_forerun: Final = "pump forerun"
+
+
+class LuxStatus3Option(StrEnum):
+    """LuxStatus3 option heating etc."""
+
+    unknown: Final = ("unknown",)
+    none: Final = ("none",)
+    heating: Final = ("heating",)
+    no_request: Final = ("no request",)
+    grid_switch_on_delay: Final = ("grid switch on delay",)
+    cycle_lock: Final = ("cycle lock",)
+    lock_time: Final = ("lock time",)
+    domestic_water: Final = ("domestic water",)
+    info_bake_out_program: Final = ("info bake out program",)
+    defrost: Final = ("defrost",)
+    pump_forerun: Final = ("pump forerun",)
+    thermal_desinfection: Final = ("thermal desinfection",)
+    cooling: Final = ("cooling",)
+    swimming_pool_solar: Final = ("swimming pool/solar",)
+    heating_external_energy_source: Final = ("heating external energy source",)
+    domestic_water_external_energy_source: Final = (
+        "domestic water external energy source",
+    )
+    flow_monitoring: Final = ("flow monitoring",)
+    second_heat_generator_1_active: Final = ("second heat generator 1 active",)
+
+
 class LuxMkTypes(Enum):
     """LuxMkTypes etc."""
 
@@ -480,6 +519,7 @@ class SensorAttrFormat(Enum):
 
     HOUR_MINUTE = 1
     CELSIUS_TENTH = 2
+    SWITCH_GAP = 3
 
 
 class SensorAttrKey(StrEnum):
