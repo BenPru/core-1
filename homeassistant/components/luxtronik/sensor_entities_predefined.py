@@ -42,6 +42,9 @@ SENSORS_STATUS: list[descr] = [
         device_class=SensorDeviceClass.ENUM,
         extra_attributes=[
             attr(SA.EVU_FIRST_START_TIME, LC.UNSET, None, True),
+            attr(SA.EVU_FIRST_END_TIME, LC.UNSET, None, True),
+            attr(SA.EVU_SECOND_START_TIME, LC.UNSET, None, True),
+            attr(SA.EVU_SECOND_END_TIME, LC.UNSET, None, True),
         ],
         options=[e.value for e in LuxOperationMode],
     ),
@@ -293,7 +296,7 @@ SENSORS: list[descr] = [
         luxtronik_key=LC.C0156_ANALOG_OUT1,
         icon="mdi:alpha-v-circle-outline",
         state_class=SensorStateClass.MEASUREMENT,
-        device_class=SensorDeviceClass.ENERGY,
+        device_class=SensorDeviceClass.VOLTAGE,
         native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         visibility=LV.V0248_ANALOG_OUT1,
         entity_registry_enabled_default=False,
@@ -304,7 +307,7 @@ SENSORS: list[descr] = [
         luxtronik_key=LC.C0157_ANALOG_OUT2,
         icon="mdi:alpha-v-circle-outline",
         state_class=SensorStateClass.MEASUREMENT,
-        device_class=SensorDeviceClass.ENERGY,
+        device_class=SensorDeviceClass.VOLTAGE,
         native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         visibility=LV.V0249_ANALOG_OUT2,
         entity_registry_enabled_default=False,
@@ -341,6 +344,17 @@ SENSORS: list[descr] = [
         invisible_if_value=-50.0,
         visibility=LV.V0291_OVERHEATING_TEMPERATURE,
     ),
+    descr(
+        key=SensorKey.ERROR_REASON,
+        luxtronik_key=LC.C0100_ERROR_REASON,
+        icon="mdi:alert",
+        extra_attributes=[
+            attr(SA.TIMESTAMP, LC.C0095_ERROR_TIME),
+            attr(SA.CODE, LC.C0100_ERROR_REASON),
+            attr(SA.CAUSE, LC.C0100_ERROR_REASON),
+            attr(SA.REMEDY, LC.C0100_ERROR_REASON),
+        ],
+    ),
     # Check
     # LuxtronikIndexStatusSensor(
     #     key_index=None,
@@ -356,21 +370,6 @@ SENSORS: list[descr] = [
     #     state_class=None,
     #     device_class=None,
     #     extra_value_attributes=["code"],
-    # ),
-    # LuxtronikIndexStatusSensor(
-    #     key_index="calculations.ID_WEB_AnzahlFehlerInSpeicher",
-    #     key_timestamp_template="calculations.ID_WEB_ERROR_Time0",
-    #     luxtronik=luxtronik,
-    #     device_info=device_info,
-    #     sensor_key="calculations.ID_WEB_ERROR_Nr0",
-    #     unique_id="error_reason",
-    #     name="Error Reason",
-    #     icon="mdi:alert",
-    #     translation_key="error_reason",
-    #     unit_of_measurement=None,
-    #     state_class=None,
-    #     device_class=None,
-    #     extra_value_attributes=["code", "cause", "remedy"],
     # ),
     # endregion Main heatpump
     # region Heating

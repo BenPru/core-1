@@ -123,9 +123,11 @@ class LuxtronikEntity(CoordinatorEntity[LuxtronikCoordinator], RestoreEntity):
         self._attr_state = value
 
         for attr in self.entity_description.extra_attributes:
-            if attr.luxtronik_key is None or attr.luxtronik_key == LP.UNSET:
+            if attr.format is None and (
+                attr.luxtronik_key is None or attr.luxtronik_key == LP.UNSET
+            ):
                 continue
-            self._attr_extra_state_attributes[attr.key.value] = self._formatted_data(
+            self._attr_extra_state_attributes[attr.key.value] = self.formatted_data(
                 attr
             )
 
@@ -135,10 +137,15 @@ class LuxtronikEntity(CoordinatorEntity[LuxtronikCoordinator], RestoreEntity):
     def _schedule_immediate_update(self):
         self.async_schedule_update_ha_state(True)
 
-    def _formatted_data(self, attr: LuxtronikEntityAttributeDescription) -> str:
+    def formatted_data(self, attr: LuxtronikEntityAttributeDescription) -> str:
+        """Calculate the attribute value."""
         value = self._get_value(attr.luxtronik_key)
         if value is None:
             return ""
+        if isinstance(value, datetime) and value.tzinfo is None:
+            # Ensure timezone:
+            time_zone = dt_util.get_time_zone(self.hass.config.time_zone)
+            value = value.replace(tzinfo=time_zone)
         if attr.format is None:
             return str(value)
         if attr.format == SensorAttrFormat.HOUR_MINUTE:

@@ -117,7 +117,10 @@ class LuxtronikSensorEntity(LuxtronikEntity, SensorEntity):
                 self._attr_native_value = LuxStatus1Option.heatpump_shutdown
         # endregion Workaround Luxtronik Bug: Line 1 shows 'heatpump coming' on shutdown!
 
-        elif isinstance(self._attr_native_value, (float, int)):
+        elif isinstance(self._attr_native_value, (float, int)) and (
+            self.entity_description.factor is not None
+            or self.entity_description.native_precision is not None
+        ):
             float_value = float(self._attr_native_value)
             if self.entity_description.factor is not None:
                 float_value *= self.entity_description.factor
